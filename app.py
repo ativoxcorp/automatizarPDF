@@ -24,17 +24,25 @@ if submitted:
         if files is not None:
                 files.append(files.pop(0))
                 for file in files:
-                        dfs = tabula.read_pdf(file, pages='all')
+                        #print('aaaaa')
+                        #print(file)
+                        dfs = tabula.read_pdf(file, encoding = 'ISO-8859-1', pages='all')
+                        #print('bbbbb')
+                        #print(dfs)
                         df = pd.DataFrame([dfs], dtype=object)
                         palavra_chave = 'R E S U M O Secao:'
                         for index in range(len(df.columns)-1):
                                 if palavra_chave in str(df.iloc[0][index].iloc[3][1]) or palavra_chave in str(df.iloc[0][index].iloc[3][0]):
                                         resumo = df.iloc[0][index]
+                                        #print(resumo.shape)
                                         resumo.rename(columns = {resumo.columns[0]:'a',resumo.columns[1]:'b', resumo.columns[2]:'c',
-                                                                resumo.columns[3]:'d',resumo.columns[4]:'e'}, inplace = True)
+                                                                resumo.columns[3]:'d'}, inplace = True) #resumo.columns[4]:'e'
                                         #resumo_secao = resumo.drop(['c', 'd'], axis=1)
-                                        data = str(resumo.iloc[1][4]).split(' ')[2]
-                                        periodo = str(resumo.iloc[1][4]).split(' ')[2][-7:]
+                                        #print('aaaaa')
+                                        #print(resumo.columns)
+                                        #resumo.to_excel('resumo.xlsx', index=False)
+                                        data = str(resumo.iloc[1][3]).split(' ')[2]
+                                        periodo = str(resumo.iloc[1][3]).split(' ')[2][-7:]
                                         filial = str(resumo.iloc[0][0]).split(' ')[1][-2:]
                                         #print(str(df.iloc[0][index].iloc[3][1]))
                                         if str(df.iloc[0][index].iloc[3][1]) == 'nan':
@@ -68,17 +76,20 @@ if submitted:
                 formatado.insert(0,'DATA',data)
                 formatado.insert(1,'PERÍODO',periodo)
                 final = formatado.replace({'FILIAL': {'ON': 'MA'}})
-
+                #files.clear()
+                st.cache_resource.clear()
                 buffer = BytesIO()
                 with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
                         final.to_excel(writer, index=False, sheet_name='Sheet1')
-                        writer.close()
-                        processed_data = buffer.getvalue()
-                        st.download_button(
-                                label="Download Excel worksheets",
-                                data=buffer,
-                                file_name="pdfToExcel.xlsx",
-                                mime="application/vnd.ms-excel")
+                #writer.close()
+                #final = final.iloc[0:0]
+                processed_data = buffer.getvalue()
+                st.download_button(
+                        label="Download Excel worksheets",
+                        data=buffer,
+                        file_name="pdfToExcel.xlsx",
+                        mime="application/vnd.ms-excel")
+                writer.close()
         else:
                st.info("Anexar documento")
                

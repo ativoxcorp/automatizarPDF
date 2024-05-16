@@ -74,10 +74,10 @@ def descontos(df_prov_desc,filial,secao):
             else:
                 eventos.append(' '.join([str(item) for item in row[1].split(' ')[1:a]]))
                 num_eventos.append(row[1].split(' ')[1])
-        if int(len(str(row[4]).split(' '))) > 1:
-            valores.append('-' + str(row[4].split(' ')[1]))
+        if int(len(str(row[3]).split(' '))) > 1:
+            valores.append('-' + str(row[3].split(' ')[1]))
         else:
-            valores.append('-' + str(row[4]))
+            valores.append('-' + str(row[3]))
         tipos.append('DESCONTOS')
         setores.append(secao)
         filiais.append(filial)
