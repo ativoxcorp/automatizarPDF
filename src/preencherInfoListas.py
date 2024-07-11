@@ -134,6 +134,7 @@ def fgts(df_fgts,filial,secao):
             filiais.append(filial)
 
 def gps(df_gps,filial,secao):
+    #df_gps.to_excel("df_gps.xlsx")
     num_eventos.append('INSS EMPRESA')
     eventos.append('INSS EMPRESA.')
     tipos.append('INSS')
@@ -142,7 +143,7 @@ def gps(df_gps,filial,secao):
     #--
     if filial == 'AUT' or filial == 'PLB':
         if filial == 'AUT':
-            valores.append(str(df_gps.iloc[0][2]).split(' ')[0])
+            valores.append(str(df_gps.iloc[0][1]).split(' ')[0])
         else:
             valores.append(str(df_gps.iloc[0][1]).split(' ')[0])
     else:
