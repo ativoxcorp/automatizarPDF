@@ -30,6 +30,10 @@ if submitted:
                         #print('bbbbb')
                         #print(dfs)
                         df = pd.DataFrame([dfs], dtype=object)
+                        #print(df)
+                        #print('-------')
+                        #df.iloc[0][1].to_excel('resumo.xlsx', index=False)
+                        #print(df.iloc[0][1])
                         palavra_chave = 'R E S U M O Secao:'
                         for index in range(len(df.columns)-1):
                                 if palavra_chave in str(df.iloc[0][index].iloc[3][1]) or palavra_chave in str(df.iloc[0][index].iloc[3][0]):
@@ -53,11 +57,19 @@ if submitted:
                                         dataframesDivididos = divideDataframe.divideDataframe(resumo,filial)
                                         infListas = preencherInfoListas.preencherInfoListas(dataframesDivididos,filial,secao)
 
-                                     
-                                if str(df.iloc[0][1].iloc[3][2]).replace(' ', '') == 'RESUMO':
+                                #print('aaaa')
+                                #df.iloc[0][1].to_excel("teste.xlsx")
+                                #print(str(df.iloc[0][1].iloc[3][1]).replace(' ', ''))    
+                                if str(df.iloc[0][1].iloc[3][1]).replace(' ', '') == 'RESUMO':
+                                        #print('aaaaa')
                                         resumo = df.iloc[0][1]
-                                        data = str(resumo.iloc[1][5]).split(' ')[2]
-                                        periodo = str(resumo.iloc[1][5]).split(' ')[2][-7:]
+                                        #resumo.to_excel('resumo.xlsx', index=False)
+                                        #print(resumo)
+                                        data = str(resumo.iloc[1][4]).split(' ')[2]
+                                        #print(data)
+                                        #print('----')
+                                        periodo = str(resumo.iloc[1][4]).split(' ')[2][-7:]
+                                        #print(periodo)
                                         if resumo.columns[0] == 'Folha de Autônomos':
                                                 filial = 'AUT'
                                                 secao = 'AUTONOMO'
@@ -66,7 +78,7 @@ if submitted:
                                                 secao = 'PRO-LABORE'  
                                         dataframesDivididos = divideDataframe.divideDataframe(resumo,filial)
                                         infListas = preencherInfoListas.preencherInfoListas(dataframesDivididos,filial,secao)
-
+                #print(dataframesDivididos)
                 d = {'FILIAL':infListas[4],'SETOR':infListas[5],
                      'TIPO':infListas[3],'N° Evento':infListas[0], 
                      'Descrição Evento':infListas[1], 'VALOR':infListas[2]}

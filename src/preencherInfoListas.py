@@ -28,10 +28,11 @@ def preencherInfoListas(dataframesDivididos,filial,secao):
 def proventos(df_prov_desc,filial,secao):
     virgula = ','
 
-    df_prov_desc.rename(columns = {df_prov_desc.columns[1]:'b'}, inplace = True)
+    df_prov_desc.rename(columns = {df_prov_desc.columns[2]:'b'}, inplace = True)
     if filial == 'AUT' or filial == 'PLB':
         df_prov_desc = df_prov_desc.drop(['b'], axis=1 )
 
+    #df_prov_desc.to_excel("dentro_provents.xlsx")
     for row in df_prov_desc.values:
         if (str(row[0]) == 'nan') or (str(row[0].split(' ')[0]) == 'Proventos:'):
             break
@@ -53,7 +54,7 @@ def descontos(df_prov_desc,filial,secao):
     virgula = ','
     #df_prov_desc.rename(columns = {df_prov_desc.columns[1]:'b'}, inplace = True)
     if filial == 'AUT' or filial == 'PLB':
-        df_prov_desc.rename(columns = {df_prov_desc.columns[1]:'b'}, inplace = True)
+        df_prov_desc.rename(columns = {df_prov_desc.columns[2]:'b'}, inplace = True)
         df_prov_desc = df_prov_desc.drop(['b'], axis=1 )
 
     for row in df_prov_desc.values:

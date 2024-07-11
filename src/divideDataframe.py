@@ -24,6 +24,10 @@ def divideDataframe(resumo_secao,filial):
 
     if filial == 'AUT' or filial == 'PLB':
         dataframes =  [df_prov_desc, df_gps]
+        #print('geregere')
+        ##print(df_prov_desc)
+        #df_prov_desc.to_excel("df_prov_desc.xlsx")
+        #df_gps.to_excel("df_gps.xlsx")
     else:
         dataframes =  [df_prov_desc, df_fgts, df_gps]
 
